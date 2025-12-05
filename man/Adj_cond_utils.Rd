@@ -7,7 +7,8 @@
 Adj_cond_utils(
   Age_Sex_data,
   Condition_utilities,
-  GenPopUtil = qalyr::GenPopUtil
+  GenPopUtil = qalyr::GenPopUtil_2018_3L,
+  Coefficients = qalyr::coefs_2018_3L
 )
 }
 \arguments{
@@ -18,7 +19,10 @@ Calculated using function \code{MeanAge_Sex()}.}
 Calculated using function \code{CalcUtils()}.}
 
 \item{GenPopUtil}{table of general population utilities by age and sex.
-Default stored in package as \code{qalyr::GenPopUtil}.}
+Default stored in package as \code{qalyr::GenPopUtil_2018_3L}.}
+
+\item{Coefficients}{vector of regression coefficients from the EQ-5D regression
+model applied by Ara and Brazier. Default stored in package as \code{qalyr::coefs_2018_3L}}
 }
 \value{
 Returns a summary table of condition-specific utilities.

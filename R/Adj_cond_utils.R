@@ -11,7 +11,9 @@
 #' @param Condition_utilities condition-specific utilities.
 #' Calculated using function \code{CalcUtils()}.
 #' @param GenPopUtil table of general population utilities by age and sex.
-#' Default stored in package as \code{qalyr::GenPopUtil}.
+#' Default stored in package as \code{qalyr::GenPopUtil_2018_3L}.
+#' @param Coefficients vector of regression coefficients from the EQ-5D regression
+#' model applied by Ara and Brazier. Default stored in package as \code{qalyr::coefs_2018_3L} 
 #'
 #' @importFrom data.table := setDT
 #'
@@ -50,13 +52,20 @@
 Adj_cond_utils <- function(
     Age_Sex_data,
     Condition_utilities,
-    GenPopUtil = qalyr::GenPopUtil
+    GenPopUtil = qalyr::GenPopUtil_2018_3L,
+    Coefficients = qalyr::coefs_2018_3L
   ) {
 
-  Age_Sex_data[ , Matched_GenPop := 0.9508566 +
-                  0.0212126 * Prop_male -
-                  0.0002587 * Av_Age -
-                  0.0000332 * (Av_Age^2)]
+  ## Ara and Brazier 2010 coefficients hard coded
+  #Age_Sex_data[ , Matched_GenPop := 0.9508566 +
+  #                0.0212126 * Prop_male -
+  #                0.0002587 * Av_Age -
+  #                0.0000332 * (Av_Age^2)]
+  
+  Age_Sex_data[ , Matched_GenPop := Coefficients["intercept"] +
+                  Coefficients["male"] * Prop_male +
+                  Coefficients["age"] * Av_Age +
+                  Coefficients["age2"] * (Av_Age^2)]
 
   Age_Sex_data <- merge(Age_Sex_data, Condition_utilities, by = c("condition"))
 
