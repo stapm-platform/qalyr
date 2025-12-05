@@ -1,7 +1,7 @@
 Package: qalyr
 Type: Package
 Title: Tobacco- and Alcohol-Related Health State Utility Value Estimation
-Version: 1.0.0
+Version: 1.1.0
 Authors@R: 
     c(
     person(given = "Duncan",
